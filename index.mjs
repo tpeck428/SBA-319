@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import db from "./db/conn.mjs";
 import mongoose from "mongoose";
+import userRoutes from './controllers/users.js';
 
 
 
@@ -13,9 +14,12 @@ const app = express();
 
 app.use(express.json());
 
+//Routes
+app.use("/users", userRoutes);
+
 
 app.get("/", (req, res) => {
-    res.send("Welcome to the API.");
+    res.send(`<div><h2>Gobblin' Dice Admin Page</h2><br><a href='/users'>Users</a><br><br><a href='/orders'>Orders</a><br><br><a href='/inventory'>Inventory</a></div>`);
 });
 
 
