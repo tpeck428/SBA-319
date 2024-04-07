@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import db from "./db/conn.mjs";
 import mongoose from "mongoose";
-import userRoutes from './controllers/users.js';
+import userRoutes from './controllers/users.mjs';
 
 
 

@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import Users from "../models/users";
+import Users from "../models/users.mjs";
 import db from "../db/conn.mjs";
 
 
@@ -44,8 +44,9 @@ router.get("/seed", async (req, res) => {
                     name: "Teesa Gaskins",
                     email: "tees.ga@email.org",
                     title: "",
-                }
+                },
         ])
+        // res.status(200).res.send(req.body)
         res.status(200).redirect('/users');
     } catch (err) {
         res.status(400).send(err)
@@ -62,6 +63,17 @@ router.get('/', async (req, res) => {
         res.status(400).send(err);
     }
 })
+
+//Create Route
+router.post('/', async (req, res) => {
+try {
+    const createdUser = await Users.create(req.body);
+    // res.status(200).send(createdUser);
+    res.status(200).redirect('/users')
+} catch (err) {
+    res.status(400).send(err);
+}
+});
 
 
 export default router;
