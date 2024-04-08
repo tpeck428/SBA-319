@@ -54,7 +54,7 @@ router.get("/seed", async (req, res) => {
 });
 
 
-//Index Route
+//INDEX/GET Route
 router.get('/', async (req, res) => {
     try {
         const foundUsers = await Users.find({});
@@ -64,7 +64,34 @@ router.get('/', async (req, res) => {
     }
 })
 
-//Create Route
+//NEW Route
+// router.get('/new', (req, res) => {
+//     res.render('users/New'); //does this require a view?
+// })
+
+
+//DELETE Route
+
+
+
+//UPDATE/PUT Route
+router.put('/:id', async (req, res) => {
+    try {
+        const updatedUsers = await Users.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true},
+        );
+
+        res.redirect(`/users/${req.params.id}`);
+    } catch (err) {
+        res.status(400).send(err);
+    }
+})
+
+
+
+//CREATE/POST Route
 router.post('/', async (req, res) => {
 try {
     const createdUser = await Users.create(req.body);
@@ -74,6 +101,16 @@ try {
     res.status(400).send(err);
 }
 });
+
+//SHOW - Pulling a user by ID using a get route
+router.get('/:id', async (req, res) => {
+    try {
+        const foundUsers = await Users.findById(req.params.id);
+        res.status(200).json(foundUsers)
+    } catch (err) {
+        res.status(404).send(err);
+    }
+})
 
 
 export default router;
