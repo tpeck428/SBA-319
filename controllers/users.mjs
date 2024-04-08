@@ -64,14 +64,22 @@ router.get('/', async (req, res) => {
     }
 })
 
-//NEW Route
+//NEW Route -- not sure if i need it
 // router.get('/new', (req, res) => {
 //     res.render('users/New'); //does this require a view?
 // })
 
 
 //DELETE Route
-
+router.delete('/:id', async(req, res) => {
+    try{
+        const deletedUsers = await Users.findByIdAndDelete(req.params.id);
+        console.log(deletedUsers);
+        res.status(200).redirect('/users');
+    } catch (err) {
+        res.status(400).send(err);
+    }
+})
 
 
 //UPDATE/PUT Route
