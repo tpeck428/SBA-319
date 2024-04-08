@@ -60,17 +60,26 @@ router.get('/', async (req, res) => {
     }
 });
 
-//DELETE ROUTE
+
+//DELETE Route
+router.delete('/:id', async(req, res) => {
+    try{
+        const deletedOrders = await Orders.findByIdAndDelete(req.params.id);
+        console.log(deletedOrders);
+        res.status(200).redirect('/users');
+    } catch (err) {
+        res.status(400).send(err);
+    }
+})
 
 
 //UPDATE/PUT Route
-//U- Update
 router.put('/:id', async (req, res) => {
-    if (req.body.readytoShip === 'on') {
-        req.body.readytoShip = true;
-    } else {
-        req.body.readytoShip = false;
-    }
+    // if (req.body.readytoShip === 'on') {
+    //     req.body.readytoShip = true;
+    // } else {
+    //     req.body.readytoShip = false;
+    // } --only used for views?
     try {
         const updatedOrders = await Orders.findByIdAndUpdate(
             req.params.id,
