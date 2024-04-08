@@ -4,7 +4,7 @@ dotenv.config();
 import db from "./db/conn.mjs";
 import mongoose from "mongoose";
 import userRoutes from './controllers/users.mjs';
-
+import ordersRoutes from './controllers/orders.mjs';
 
 
 //Express application
@@ -16,6 +16,7 @@ app.use(express.json());
 
 //Routes
 app.use("/users", userRoutes);
+app.use("/orders", ordersRoutes);
 
 
 app.get("/", (req, res) => {
