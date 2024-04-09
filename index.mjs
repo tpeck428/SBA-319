@@ -5,6 +5,7 @@ import db from "./db/conn.mjs";
 import mongoose from "mongoose";
 import userRoutes from './controllers/users.mjs';
 import ordersRoutes from './controllers/orders.mjs';
+import inventoryRoutes from './controllers/inventory.mjs';
 
 
 //Express application
@@ -17,6 +18,7 @@ app.use(express.json());
 //Routes
 app.use("/users", userRoutes);
 app.use("/orders", ordersRoutes);
+app.use("/inventory", inventoryRoutes);
 
 
 app.get("/", (req, res) => {
@@ -24,7 +26,7 @@ app.get("/", (req, res) => {
 });
 
 
-// Global error handling
+// Global error handling -- working
 app.use((err, _req, res, next) => {
     res.status(500).send("seems like we messed up somewhere.")
 })

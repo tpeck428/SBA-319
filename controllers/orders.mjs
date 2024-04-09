@@ -98,7 +98,7 @@ router.put('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const createdOrders = await Orders.create(req.body);
-        // res.status(200).send(createdUser);
+        
         res.status(200).redirect('/orders')
     } catch (err) {
         res.status(400).send(err);
@@ -106,7 +106,7 @@ router.post('/', async (req, res) => {
     });
 
 
-//SHOW - Pulling an order by ID using a get route
+//SHOW Route - Pulling an order by ID 
 router.get('/:id', async (req, res) => {
     try {
         const foundOrders = await Orders.findById(req.params.id);
