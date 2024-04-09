@@ -43,6 +43,18 @@ router.get('/', async (req, res) => {
     }
 });
 
+//DELETE Route
+router.delete('/:id', async(req, res) => {
+    try{
+        const deletedInventory = await Inventory.findByIdAndDelete(req.params.id);
+        console.log(deletedInventory);
+        res.status(200).redirect('/users');
+    } catch (err) {
+        res.status(400).send(err);
+    }
+})
+
+
 //UPDATE/PUT Route
 router.put('/:id', async (req, res) => {
     try {
@@ -71,7 +83,7 @@ router.post('/', async (req, res) => {
 });
 
 
-//SHOW Route - Pulling an order by ID 
+//READ Route - Pulling an item by ID 
 router.get('/:id', async (req, res) => {
     try {
         const foundInventory = await Inventory.findById(req.params.id);
@@ -80,6 +92,12 @@ router.get('/:id', async (req, res) => {
         res.status(404).send(err);
     }
 })
+
+//Compound Index -- unsure how to test
+// db.Inventory.createIndex( {
+//     name: 1,
+//     quantity: -1
+//  } )
 
 
 export default router;

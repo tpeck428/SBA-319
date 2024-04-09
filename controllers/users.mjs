@@ -107,7 +107,7 @@ try {
 });
 
 
-//SHOW - Pulling a user by ID using a get route
+//READ Route - Pulling a user by ID using a get route
 router.get('/:id', async (req, res) => {
     try {
         const foundUsers = await Users.findById(req.params.id);

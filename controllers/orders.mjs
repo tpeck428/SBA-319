@@ -106,7 +106,7 @@ router.post('/', async (req, res) => {
     });
 
 
-//SHOW Route - Pulling an order by ID 
+//Read Route - Pulling an order by ID 
 router.get('/:id', async (req, res) => {
     try {
         const foundOrders = await Orders.findById(req.params.id);
